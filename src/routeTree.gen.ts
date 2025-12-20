@@ -9,38 +9,165 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SolanaRouteImport } from './routes/_solana'
+import { Route as NearRouteImport } from './routes/_near'
+import { Route as InjectiveRouteImport } from './routes/_injective'
+import { Route as EvmRouteImport } from './routes/_evm'
+import { Route as AptosRouteImport } from './routes/_aptos'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SolanaSolanaRouteImport } from './routes/_solana/solana'
+import { Route as NearNearRouteImport } from './routes/_near/near'
+import { Route as InjectiveInjectiveRouteImport } from './routes/_injective/injective'
+import { Route as EvmPolygonRouteImport } from './routes/_evm/polygon'
+import { Route as AptosAptosRouteImport } from './routes/_aptos/aptos'
 
+const SolanaRoute = SolanaRouteImport.update({
+  id: '/_solana',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NearRoute = NearRouteImport.update({
+  id: '/_near',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InjectiveRoute = InjectiveRouteImport.update({
+  id: '/_injective',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EvmRoute = EvmRouteImport.update({
+  id: '/_evm',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AptosRoute = AptosRouteImport.update({
+  id: '/_aptos',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SolanaSolanaRoute = SolanaSolanaRouteImport.update({
+  id: '/solana',
+  path: '/solana',
+  getParentRoute: () => SolanaRoute,
+} as any)
+const NearNearRoute = NearNearRouteImport.update({
+  id: '/near',
+  path: '/near',
+  getParentRoute: () => NearRoute,
+} as any)
+const InjectiveInjectiveRoute = InjectiveInjectiveRouteImport.update({
+  id: '/injective',
+  path: '/injective',
+  getParentRoute: () => InjectiveRoute,
+} as any)
+const EvmPolygonRoute = EvmPolygonRouteImport.update({
+  id: '/polygon',
+  path: '/polygon',
+  getParentRoute: () => EvmRoute,
+} as any)
+const AptosAptosRoute = AptosAptosRouteImport.update({
+  id: '/aptos',
+  path: '/aptos',
+  getParentRoute: () => AptosRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/aptos': typeof AptosAptosRoute
+  '/polygon': typeof EvmPolygonRoute
+  '/injective': typeof InjectiveInjectiveRoute
+  '/near': typeof NearNearRoute
+  '/solana': typeof SolanaSolanaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/aptos': typeof AptosAptosRoute
+  '/polygon': typeof EvmPolygonRoute
+  '/injective': typeof InjectiveInjectiveRoute
+  '/near': typeof NearNearRoute
+  '/solana': typeof SolanaSolanaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_aptos': typeof AptosRouteWithChildren
+  '/_evm': typeof EvmRouteWithChildren
+  '/_injective': typeof InjectiveRouteWithChildren
+  '/_near': typeof NearRouteWithChildren
+  '/_solana': typeof SolanaRouteWithChildren
+  '/_aptos/aptos': typeof AptosAptosRoute
+  '/_evm/polygon': typeof EvmPolygonRoute
+  '/_injective/injective': typeof InjectiveInjectiveRoute
+  '/_near/near': typeof NearNearRoute
+  '/_solana/solana': typeof SolanaSolanaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/aptos' | '/polygon' | '/injective' | '/near' | '/solana'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/aptos' | '/polygon' | '/injective' | '/near' | '/solana'
+  id:
+    | '__root__'
+    | '/'
+    | '/_aptos'
+    | '/_evm'
+    | '/_injective'
+    | '/_near'
+    | '/_solana'
+    | '/_aptos/aptos'
+    | '/_evm/polygon'
+    | '/_injective/injective'
+    | '/_near/near'
+    | '/_solana/solana'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AptosRoute: typeof AptosRouteWithChildren
+  EvmRoute: typeof EvmRouteWithChildren
+  InjectiveRoute: typeof InjectiveRouteWithChildren
+  NearRoute: typeof NearRouteWithChildren
+  SolanaRoute: typeof SolanaRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/_solana': {
+      id: '/_solana'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof SolanaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_near': {
+      id: '/_near'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof NearRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_injective': {
+      id: '/_injective'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof InjectiveRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_evm': {
+      id: '/_evm'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof EvmRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_aptos': {
+      id: '/_aptos'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof AptosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +175,104 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_solana/solana': {
+      id: '/_solana/solana'
+      path: '/solana'
+      fullPath: '/solana'
+      preLoaderRoute: typeof SolanaSolanaRouteImport
+      parentRoute: typeof SolanaRoute
+    }
+    '/_near/near': {
+      id: '/_near/near'
+      path: '/near'
+      fullPath: '/near'
+      preLoaderRoute: typeof NearNearRouteImport
+      parentRoute: typeof NearRoute
+    }
+    '/_injective/injective': {
+      id: '/_injective/injective'
+      path: '/injective'
+      fullPath: '/injective'
+      preLoaderRoute: typeof InjectiveInjectiveRouteImport
+      parentRoute: typeof InjectiveRoute
+    }
+    '/_evm/polygon': {
+      id: '/_evm/polygon'
+      path: '/polygon'
+      fullPath: '/polygon'
+      preLoaderRoute: typeof EvmPolygonRouteImport
+      parentRoute: typeof EvmRoute
+    }
+    '/_aptos/aptos': {
+      id: '/_aptos/aptos'
+      path: '/aptos'
+      fullPath: '/aptos'
+      preLoaderRoute: typeof AptosAptosRouteImport
+      parentRoute: typeof AptosRoute
+    }
   }
 }
 
+interface AptosRouteChildren {
+  AptosAptosRoute: typeof AptosAptosRoute
+}
+
+const AptosRouteChildren: AptosRouteChildren = {
+  AptosAptosRoute: AptosAptosRoute,
+}
+
+const AptosRouteWithChildren = AptosRoute._addFileChildren(AptosRouteChildren)
+
+interface EvmRouteChildren {
+  EvmPolygonRoute: typeof EvmPolygonRoute
+}
+
+const EvmRouteChildren: EvmRouteChildren = {
+  EvmPolygonRoute: EvmPolygonRoute,
+}
+
+const EvmRouteWithChildren = EvmRoute._addFileChildren(EvmRouteChildren)
+
+interface InjectiveRouteChildren {
+  InjectiveInjectiveRoute: typeof InjectiveInjectiveRoute
+}
+
+const InjectiveRouteChildren: InjectiveRouteChildren = {
+  InjectiveInjectiveRoute: InjectiveInjectiveRoute,
+}
+
+const InjectiveRouteWithChildren = InjectiveRoute._addFileChildren(
+  InjectiveRouteChildren,
+)
+
+interface NearRouteChildren {
+  NearNearRoute: typeof NearNearRoute
+}
+
+const NearRouteChildren: NearRouteChildren = {
+  NearNearRoute: NearNearRoute,
+}
+
+const NearRouteWithChildren = NearRoute._addFileChildren(NearRouteChildren)
+
+interface SolanaRouteChildren {
+  SolanaSolanaRoute: typeof SolanaSolanaRoute
+}
+
+const SolanaRouteChildren: SolanaRouteChildren = {
+  SolanaSolanaRoute: SolanaSolanaRoute,
+}
+
+const SolanaRouteWithChildren =
+  SolanaRoute._addFileChildren(SolanaRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AptosRoute: AptosRouteWithChildren,
+  EvmRoute: EvmRouteWithChildren,
+  InjectiveRoute: InjectiveRouteWithChildren,
+  NearRoute: NearRouteWithChildren,
+  SolanaRoute: SolanaRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

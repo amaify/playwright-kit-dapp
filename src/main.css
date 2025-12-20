@@ -1,8 +1,11 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
-@theme {
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
     /* Core dark surfaces */
-    --color-background: oklch(12.9% 0.041 264.7);
+    --color-background: oklch(7.0% 0.01 260);
     --color-surface: oklch(20.8% 0.04 265.8);
     --color-surface-2: oklch(28.0% 0.037 260);
     --color-popover: oklch(18.3% 0.031 263.4);
@@ -39,12 +42,16 @@
     --color-injective: oklch(68.5% 0.148 237.3);
 }
 
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+@layer base {
+    html,
+    body {
+        margin: 0;
+    }
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
 }
 
 body {
@@ -58,4 +65,5 @@ body {
     min-width: 325px;
     margin: 0 auto;
     font-size: 62.5%;
+    min-height: 100svh;
 }

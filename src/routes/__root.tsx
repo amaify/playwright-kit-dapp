@@ -1,6 +1,7 @@
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
+import Header from "@/components/header/header";
 import appCss from "../main.css?url";
 
 export const Route = createRootRoute({
@@ -17,7 +18,25 @@ export const Route = createRootRoute({
                 title: "Playwright kit Test Dapp",
             },
         ],
-        links: [{ rel: "stylesheet", href: appCss }],
+        links: [
+            { rel: "stylesheet", href: appCss },
+            {
+                rel: "icon",
+                type: "image/png",
+                sizes: "32x32",
+                href: "icon-32x32.png",
+            },
+            {
+                rel: "icon",
+                type: "image/png",
+                sizes: "16x16",
+                href: "icon-16x16.png",
+            },
+            {
+                rel: "icon",
+                href: "favicon.ico",
+            },
+        ],
     }),
 
     shellComponent: RootDocument,
@@ -30,6 +49,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
                 <HeadContent />
             </head>
             <body>
+                <Header />
                 {children}
                 <TanStackDevtools
                     config={{
