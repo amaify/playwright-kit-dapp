@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+@theme {
+    /* Core dark surfaces */
+    --color-background: oklch(12.9% 0.041 264.7);
+    --color-surface: oklch(20.8% 0.04 265.8);
+    --color-surface-2: oklch(28.0% 0.037 260);
+    --color-popover: oklch(18.3% 0.031 263.4);
+    --color-card: oklch(20.8% 0.04 265.8);
+    --color-input: oklch(12.9% 0.041 264.7);
+
+    /* Borders / dividers */
+    --color-border: oklch(37.2% 0.039 257.3);
+    --color-border-soft: oklch(28.0% 0.037 260);
+
+    /* Typography */
+    --color-foreground: oklch(98.4% 0.003 247.9);
+    --color-foreground-muted: oklch(86.9% 0.02 252.9);
+    --color-foreground-subtle: oklch(71.1% 0.035 256.8);
+    --color-placeholder: oklch(55.4% 0.041 257.4);
+
+    /* Brand / CTAs */
+    --color-primary: oklch(60.6% 0.219 292.7);
+    --color-primary-hover: oklch(70.9% 0.159 293.5);
+    --color-primary-active: oklch(54.1% 0.247 293);
+    --color-focus: oklch(75.4% 0.139 232.7);
+
+    /* Status */
+    --color-success: oklch(69.6% 0.149 162.5);
+    --color-warning: oklch(76.9% 0.165 70.1);
+    --color-danger: oklch(64.5% 0.215 16.4);
+
+    /* Chain accents */
+    --color-evm: oklch(76.9% 0.165 70.1);
+    --color-near: oklch(69.6% 0.149 162.5);
+    --color-aptos: oklch(71.5% 0.126 215.2);
+    --color-solana-a: oklch(66.7% 0.259 322.2);
+    --color-solana-b: oklch(77.3% 0.153 163.2);
+    --color-injective: oklch(68.5% 0.148 237.3);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    @apply bg-background text-foreground;
+    font-family:
+        -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+        "Droid Sans", "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    max-width: 1920px;
+    min-width: 325px;
+    margin: 0 auto;
+    font-size: 62.5%;
+}
