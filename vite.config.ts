@@ -1,23 +1,28 @@
-import { defineConfig } from 'vite'
-import { devtools } from '@tanstack/devtools-vite'
-import { tanstackStart } from '@tanstack/react-start/plugin/vite'
-import viteReact from '@vitejs/plugin-react'
-import viteTsConfigPaths from 'vite-tsconfig-paths'
-import tailwindcss from '@tailwindcss/vite'
-import { nitro } from 'nitro/vite'
+import tailwindcss from "@tailwindcss/vite";
+import { devtools } from "@tanstack/devtools-vite";
+import { tanstackRouter } from "@tanstack/router-plugin/vite";
+import viteReact from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
+import { nodePolyfills } from "vite-plugin-node-polyfills";
+import viteTsConfigPaths from "vite-tsconfig-paths";
 
 const config = defineConfig({
-  plugins: [
-    devtools(),
-    nitro(),
-    // this is the plugin that enables path aliases
-    viteTsConfigPaths({
-      projects: ['./tsconfig.json'],
-    }),
-    tailwindcss(),
-    tanstackStart(),
-    viteReact(),
-  ],
-})
+    plugins: [
+        devtools(),
+        viteTsConfigPaths({
+            projects: ["./tsconfig.json"],
+        }),
+        tailwindcss(),
+        nodePolyfills({ globals: { Buffer: true }, protocolImports: true }),
+        tanstackRouter({ target: "react", autoCodeSplitting: true }),
+        viteReact(),
+    ],
+    resolve: {
+        alias: {
+            crypto: "crypto-browserify",
+            stream: "stream-browserify",
+        },
+    },
+});
 
-export default config
+export default config;

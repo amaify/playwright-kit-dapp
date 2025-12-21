@@ -11,6 +11,8 @@
     --color-popover: oklch(18.3% 0.031 263.4);
     --color-card: oklch(20.8% 0.04 265.8);
     --color-input: oklch(12.9% 0.041 264.7);
+    --color-glass-background: oklch(23.081% 0.01 268.257 / 0.6);
+    --color-glass-border: oklch(98.511% 0.00011 271.152 / 0.08);
 
     /* Borders / dividers */
     --color-border: oklch(37.2% 0.039 257.3);
@@ -18,7 +20,7 @@
 
     /* Typography */
     --color-foreground: oklch(98.4% 0.003 247.9);
-    --color-foreground-muted: oklch(86.9% 0.02 252.9);
+    --color-foreground-muted: oklch(65.9% 0.02 0.56);
     --color-foreground-subtle: oklch(71.1% 0.035 256.8);
     --color-placeholder: oklch(55.4% 0.041 257.4);
 
@@ -66,4 +68,10 @@ body {
     margin: 0 auto;
     font-size: 62.5%;
     min-height: 100svh;
+}
+
+.gradient-text {
+    background-image: linear-gradient(135deg, hsl(0 0% 98%) 0%, hsl(165 80% 45%) 100%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
 }

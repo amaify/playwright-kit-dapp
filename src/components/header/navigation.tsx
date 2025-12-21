@@ -1,41 +1,19 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import { CheckIcon, ChevronDown } from "lucide-react";
 import { useState } from "react";
+import { navigation } from "@/lib/constants";
 import { Button } from "../ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
 
-const navigation = [
-    {
-        name: "Aptos",
-        href: "/aptos",
-    },
-    {
-        name: "Injective",
-        href: "/injective",
-    },
-    {
-        name: "Near",
-        href: "/near",
-    },
-    {
-        name: "Polygon",
-        href: "/polygon",
-    },
-    {
-        name: "Solana",
-        href: "/solana",
-    },
-] as const;
-
 export default function Navigation() {
-    const [title, setTitle] = useState("Select chain");
-    const [open, setOpen] = useState(false);
     const { pathname } = useLocation();
+    const [title, setTitle] = useState(pathname === "/" ? "Select chain" : pathname.split("/")[1]);
+    const [open, setOpen] = useState(false);
 
     return (
         <DropdownMenu onOpenChange={setOpen} open={open}>
             <DropdownMenuTrigger asChild>
-                <Button variant="outline" className="text-lg min-w-32">
+                <Button variant="outline" className="text-lg capitalize min-w-32">
                     <span className="mr-auto">{title}</span>
                     <ChevronDown />
                 </Button>

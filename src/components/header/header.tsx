@@ -1,9 +1,13 @@
+import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
-import { Button } from "../ui/button";
 import Logo from "./logo";
 import Navigation from "./navigation";
 
-export default function Header() {
+type Props = {
+    connectWalletButton?: ReactNode;
+};
+
+export default function Header({ connectWalletButton }: Props) {
     return (
         <nav
             className={cn(
@@ -14,9 +18,7 @@ export default function Header() {
             <Logo />
             <div className="flex items-center gap-4">
                 <Navigation />
-                <Button variant="default" size="default" className="text-lg uppercase">
-                    Connect wallet
-                </Button>
+                {connectWalletButton ? connectWalletButton : null}
             </div>
         </nav>
     );
