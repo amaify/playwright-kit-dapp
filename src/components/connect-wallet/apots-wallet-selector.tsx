@@ -66,7 +66,7 @@ export function WalletSelector(walletSortingOptions: WalletSortingOptions) {
     ) : (
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogTrigger asChild>
-                <Button>Connect a Wallet</Button>
+                <Button className="uppercase">Connect a Wallet</Button>
             </DialogTrigger>
             <ConnectWalletDialog close={closeDialog} {...walletSortingOptions} />
         </Dialog>
