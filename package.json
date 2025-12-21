@@ -6,11 +6,15 @@
         "dev": "vite dev --port 3000",
         "build": "vite build",
         "preview": "vite preview",
-        "test": "vitest run"
+        "test": "vitest run",
+        "lint": "biome check .",
+        "lint:fix": "biome check ./src --write",
+        "format": "biome format ./src --write ."
     },
     "dependencies": {
         "@aptos-labs/ts-sdk": "^5.2.0",
         "@aptos-labs/wallet-adapter-react": "^7.2.7",
+        "@coral-xyz/anchor": "^0.32.1",
         "@injectivelabs/networks": "^1.16.38",
         "@injectivelabs/sdk-ts": "^1.16.38",
         "@injectivelabs/utils": "^1.16.38",
@@ -23,6 +27,7 @@
         "@radix-ui/react-collapsible": "^1.1.12",
         "@radix-ui/react-dialog": "^1.1.15",
         "@radix-ui/react-dropdown-menu": "^2.1.16",
+        "@radix-ui/react-label": "^2.1.8",
         "@radix-ui/react-slot": "^1.2.4",
         "@solana/wallet-adapter-base": "^0.9.27",
         "@solana/wallet-adapter-react": "^0.15.39",
@@ -37,6 +42,8 @@
         "@tanstack/react-router-ssr-query": "^1.141.8",
         "@tanstack/react-start": "^1.141.8",
         "@tanstack/router-plugin": "^1.142.0",
+        "@types/big.js": "^6.2.2",
+        "big.js": "^7.0.1",
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
         "connectkit": "^1.9.1",

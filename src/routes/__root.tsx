@@ -2,6 +2,7 @@ import { TanStackDevtools } from "@tanstack/react-devtools";
 import type { QueryClient } from "@tanstack/react-query";
 import { createRootRouteWithContext, HeadContent, Outlet, Scripts } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
+import { Toaster } from "sonner";
 import appCss from "../main.css?url";
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
@@ -47,6 +48,14 @@ function RootDocument() {
         <>
             <HeadContent />
             <Outlet />
+            <Toaster
+                expand
+                duration={5000}
+                visibleToasts={4}
+                toastOptions={{
+                    className: "w-[450px]",
+                }}
+            />
             <TanStackDevtools
                 config={{
                     position: "bottom-right",
