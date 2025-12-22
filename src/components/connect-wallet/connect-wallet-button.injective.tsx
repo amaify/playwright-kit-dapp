@@ -6,12 +6,16 @@ export default function InjectiveConnectWallet() {
 
     if (!isConnected) {
         return (
-            <Button className="uppercase" onClick={() => connect("keplr")}>
+            <Button className="uppercase" data-testid="connect-wallet-button" onClick={() => connect("keplr")}>
                 Connect wallet
             </Button>
         );
     }
 
     const truncatedAddress = `${address?.slice(0, 6)}...${address?.slice(-6)}`;
-    return <Button onClick={disconnect}>{truncatedAddress}</Button>;
+    return (
+        <Button data-testid="wallet-connected-button" onClick={disconnect}>
+            {truncatedAddress}
+        </Button>
+    );
 }

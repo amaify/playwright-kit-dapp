@@ -6,7 +6,13 @@ export default function EVMConnectWallet() {
         <ConnectKitButton.Custom>
             {({ isConnected, show, truncatedAddress }) => {
                 return (
-                    <Button variant="default" onClick={show} size="default" className="text-lg uppercase">
+                    <Button
+                        variant="default"
+                        onClick={show}
+                        size="default"
+                        data-testid={!isConnected ? "connect-wallet-button" : "wallet-connected-button"}
+                        className="text-lg uppercase"
+                    >
                         {isConnected ? truncatedAddress : "Connect Wallet"}
                     </Button>
                 );

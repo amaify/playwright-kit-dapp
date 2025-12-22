@@ -6,11 +6,15 @@ export default function NearConnectWallet() {
 
     if (!isConnected) {
         return (
-            <Button className="uppercase" onClick={connectWallet}>
+            <Button data-testid="connect-wallet-button" className="uppercase" onClick={connectWallet}>
                 Connect wallet
             </Button>
         );
     }
 
-    return <Button onClick={disconnectWallet}>{accountId}</Button>;
+    return (
+        <Button data-testid="wallet-connected-button" onClick={disconnectWallet}>
+            {accountId}
+        </Button>
+    );
 }

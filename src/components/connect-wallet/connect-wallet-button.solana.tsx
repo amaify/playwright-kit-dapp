@@ -7,9 +7,17 @@ export default function SolanaConnectWallet() {
     const { connected, publicKey, disconnect } = useWallet();
 
     if (!connected) {
-        return <Button onClick={() => setVisible(true)}>Connect Wallet</Button>;
+        return (
+            <Button data-testid="connect-wallet-button" onClick={() => setVisible(true)}>
+                Connect Wallet
+            </Button>
+        );
     }
 
     const truncatedAddress = `${publicKey?.toBase58().slice(0, 6)}...${publicKey?.toBase58().slice(-6)}`;
-    return <Button onClick={disconnect}>{truncatedAddress}</Button>;
+    return (
+        <Button data-testid="wallet-connected-button" onClick={disconnect}>
+            {truncatedAddress}
+        </Button>
+    );
 }

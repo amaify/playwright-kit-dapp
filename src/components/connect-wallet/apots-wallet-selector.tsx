@@ -40,7 +40,9 @@ export function WalletSelector(walletSortingOptions: WalletSortingOptions) {
     return connected ? (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button>{account?.ansName || truncateAddress(account?.address?.toString()) || "Unknown"}</Button>
+                <Button data-testid="wallet-connected-button">
+                    {account?.ansName || truncateAddress(account?.address?.toString()) || "Unknown"}
+                </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
                 <DropdownMenuItem onSelect={copyAddress} className="gap-2">
@@ -66,7 +68,9 @@ export function WalletSelector(walletSortingOptions: WalletSortingOptions) {
     ) : (
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogTrigger asChild>
-                <Button className="uppercase">Connect a Wallet</Button>
+                <Button className="uppercase" data-testid="connect-wallet-button">
+                    Connect Wallet
+                </Button>
             </DialogTrigger>
             <ConnectWalletDialog close={closeDialog} {...walletSortingOptions} />
         </Dialog>
@@ -176,7 +180,9 @@ function WalletRow({ wallet, onConnect }: WalletRowProps) {
                 </Button>
             ) : (
                 <WalletItem.ConnectButton asChild>
-                    <Button size="sm">Connect</Button>
+                    <Button size="sm" data-testid={`connect-wallet-${wallet.name}`}>
+                        Connect
+                    </Button>
                 </WalletItem.ConnectButton>
             )}
         </WalletItem>
