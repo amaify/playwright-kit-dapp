@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { parseEther } from "viem";
 import { useSendTransaction } from "wagmi";
 import { TransferForm } from "@/components/transfer-form/transfer-form";
+import { TransferFormEVM } from "@/components/transfer-form/transfer-form.evm";
 
 export const Route = createFileRoute("/_evm/polygon")({
     component: RouteComponent,
@@ -37,13 +38,20 @@ function RouteComponent() {
                 <h1 className="text-2xl font-bold">Polygon Transfer</h1>
                 <p className="text-foreground-muted text-lg">Send POL tokens to any address on the Polygon network.</p>
             </div>
-            <TransferForm
-                address={address}
-                amount={amount}
-                setAddress={setAddress}
-                setAmount={setAmount}
-                onSubmit={handleSubmit}
-            />
+
+            <div className="flex w-full flex-col gap-6">
+                <TransferForm
+                    address={address}
+                    amount={amount}
+                    setAddress={setAddress}
+                    setAmount={setAmount}
+                    onSubmit={handleSubmit}
+                />
+
+                <hr />
+
+                <TransferFormEVM />
+            </div>
         </div>
     );
 }
