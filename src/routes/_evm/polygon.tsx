@@ -1,10 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
-import { parseEther } from "viem";
-import { useSendTransaction } from "wagmi";
+import { parseEther, verifyMessage } from "viem";
+import { useConnection, useSendTransaction, useSignMessage } from "wagmi";
 import { TransferForm } from "@/components/transfer-form/transfer-form";
 import { TransferFormEVM } from "@/components/transfer-form/transfer-form.evm";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/_evm/polygon")({
     component: RouteComponent,
@@ -14,6 +15,9 @@ function RouteComponent() {
     const [address, setAddress] = useState("");
     const [amount, setAmount] = useState("");
     const sendTransaction = useSendTransaction();
+    const [signedMessage, setSignedMessage] = useState("");
+    const { mutate } = useSignMessage();
+    const { address: userAddress } = useConnection();
 
     const handleSubmit = async () => {
         sendTransaction.mutate(
@@ -51,6 +55,41 @@ function RouteComponent() {
                 <hr />
 
                 <TransferFormEVM />
+
+                <div>
+                    <Button
+                        onClick={() => {
+                            mutate(
+                                { message: "Hello world!" },
+                                {
+                                    onSuccess: (data) => {
+                                        toast.success("Message signed successfully");
+                                        setSignedMessage(data);
+                                    },
+                                    onError: () => {
+                                        toast.error("Message signing failed");
+                                    },
+                                },
+                            );
+                        }}
+                    >
+                        Sign Message
+                    </Button>
+
+                    <Button
+                        onClick={async () => {
+                            const result = await verifyMessage({
+                                address: userAddress as `0x${string}`,
+                                message: "Hello world!",
+                                signature: signedMessage as `0x${string}`,
+                            });
+
+                            console.info("Verified Address: ", result);
+                        }}
+                    >
+                        Verify Signature
+                    </Button>
+                </div>
             </div>
         </div>
     );

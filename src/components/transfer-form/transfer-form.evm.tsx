@@ -1,17 +1,28 @@
 import { type ChangeEvent, type FormEvent, useState } from "react";
 import { toast } from "sonner";
 import { type Address, parseEther } from "viem";
-import { useSendCalls } from "wagmi";
+import { useConfig, useConnection, useSendCalls } from "wagmi";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { bookstoreAbi } from "@/lib/bookstore-abi";
+import { maticAbi } from "@/lib/matic-abi";
+import { maticToPolAbi } from "@/lib/matic-to-pol-abi";
 
 export function TransferFormEVM() {
     const [formFields, setFormFields] = useState<Record<string, string>>({});
-    const sendCalls = useSendCalls();
+    const config = useConfig();
+    const sendCalls = useSendCalls({ config: config });
+    const { address: userAddress, connector } = useConnection();
+
+    const MATIC_TO_POL = "0x3a3b750e7d4d389bc1d0be20e5d09530f82b9911";
+    const MATIC_CA = "0x3fd0A53F4Bf853985a95F4Eb3F9C9FDE1F8e2b53";
+    const BOOKSTORE_CA = "0x60Af03e8858bed2AbB8d6e5defa7b71A9e6f16f8";
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        const value = parseEther(formFields.thirdAmount);
 
         sendCalls.mutate(
             {
@@ -25,14 +36,34 @@ export function TransferFormEVM() {
                         value: parseEther(formFields.secondAmount),
                     },
                     {
-                        data: "0xdeadbeef",
-                        to: "0xa5cc3c03994DB5b0d9A5eEdD10CabaB0813678AC",
+                        to: MATIC_CA as Address,
+                        abi: maticAbi,
+                        functionName: "approve",
+                        args: [MATIC_TO_POL, parseEther(formFields.thirdAmount)],
+                    },
+                    {
+                        to: MATIC_TO_POL as Address,
+                        abi: maticToPolAbi,
+                        functionName: "migrate",
+                        args: [parseEther(formFields.thirdAmount)],
+                    },
+                    {
+                        to: BOOKSTORE_CA as Address,
+                        abi: bookstoreAbi,
+                        functionName: "deposit",
+                        args: [value],
+                        value,
                     },
                 ],
+                account: userAddress as Address,
+                connector,
             },
             {
                 onSuccess: () => toast.success("Transaction successful"),
-                onError: () => toast.error("Transaction failed"),
+                onError: (error) => {
+                    console.error({ error });
+                    toast.error("Transaction failed");
+                },
             },
         );
     };
@@ -95,6 +126,17 @@ export function TransferFormEVM() {
                     name="secondAmount"
                     placeholder="Enter amount"
                     value={formFields.secondAmount}
+                    required
+                    autoComplete="off"
+                    onChange={handleChange}
+                    className="border-border bg-background"
+                />
+                <Input
+                    id="amount"
+                    type="text"
+                    name="thirdAmount"
+                    placeholder="Enter amount to migrate"
+                    value={formFields.thirdAmount}
                     required
                     autoComplete="off"
                     onChange={handleChange}
