@@ -136,35 +136,35 @@ declare module '@tanstack/react-router' {
     '/_solana': {
       id: '/_solana'
       path: ''
-      fullPath: ''
+      fullPath: '/'
       preLoaderRoute: typeof SolanaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_near': {
       id: '/_near'
       path: ''
-      fullPath: ''
+      fullPath: '/'
       preLoaderRoute: typeof NearRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_injective': {
       id: '/_injective'
       path: ''
-      fullPath: ''
+      fullPath: '/'
       preLoaderRoute: typeof InjectiveRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_evm': {
       id: '/_evm'
       path: ''
-      fullPath: ''
+      fullPath: '/'
       preLoaderRoute: typeof EvmRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_aptos': {
       id: '/_aptos'
       path: ''
-      fullPath: ''
+      fullPath: '/'
       preLoaderRoute: typeof AptosRouteImport
       parentRoute: typeof rootRouteImport
     }
