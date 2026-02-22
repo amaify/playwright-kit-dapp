@@ -101,7 +101,7 @@ export default function NearProvider({ children }: { children: ReactNode }) {
         setIsLoading(true);
         try {
             const { setupModal } = await import("@near-wallet-selector/modal-ui");
-            const modalInstance = setupModal(selector, { contractId: "hello.near-examples.testnet", });
+            const modalInstance = setupModal(selector, {});
             modalInstance.show();
             setIsLoading(false);
         } catch (error) {
